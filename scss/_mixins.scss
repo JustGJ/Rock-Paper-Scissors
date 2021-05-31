@@ -1,0 +1,10 @@
+@mixin display-align($display, $align) {
+    display: $display;
+    align-items: $align;
+  }
+
+@mixin display-align-justify($display, $align, $justify) {
+    display: $display;
+    align-items: $align;
+    justify-content: $justify;
+  }
