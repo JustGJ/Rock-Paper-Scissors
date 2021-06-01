@@ -60,6 +60,7 @@ body {
   position: relative;
   margin-top: 64px;
   width: 476px;
+  animation: scaleGame 0.4s ease-in-out;
 }
 .game__content img {
   transform: translate(25%, 25%);
@@ -78,22 +79,31 @@ body {
 }
 .game__content button img {
   transform: translate(-50%, -50%);
+  pointer-events: none;
 }
 .game__content__paper {
   border: 22px solid #4664F4;
   box-shadow: inset 0 10px 0 rgba(187, 191, 216, 0.5), 0 10px 0 #2945c2;
   left: 35px;
+  right: "";
+  bottom: "";
+  top: "";
 }
 .game__content__scissors {
   border: 22px solid #EB9F0E;
   box-shadow: inset 0 10px 0 rgba(187, 191, 216, 0.5), 0 10px 0 #C76C1B;
+  left: "";
   right: 35px;
+  bottom: "";
+  top: "";
 }
 .game__content__rock {
   border: 22px solid #DB2E4D;
   box-shadow: inset 0 10px 0 rgba(187, 191, 216, 0.5), 0 10px 0 #9D1634;
-  bottom: -20%;
+  left: "";
   right: 33%;
+  bottom: -20%;
+  top: "";
 }
 .game__rules button {
   cursor: pointer;
@@ -107,6 +117,94 @@ body {
   position: absolute;
   right: 32px;
   bottom: -50px;
+}
+.game__fight {
+  position: absolute;
+  top: 200px;
+  display: flex;
+  align-items: center;
+  width: 400px;
+}
+.game__fight__player, .game__fight__bot {
+  animation: displayResultPlayer 2s ease-in forwards;
+  position: relative;
+  background-color: #FFF;
+  height: 144px;
+  width: 152px;
+  border-radius: 50%;
+  padding: 60px;
+}
+.game__fight__player::before, .game__fight__bot::before {
+  content: "YOU PICKED";
+  display: block;
+  position: absolute;
+  width: 130px;
+  top: -60px;
+  left: 25px;
+  transform: scale(0);
+  animation: displayYouPicked 2s forwards;
+}
+.game__fight__player--paper {
+  border: 22px solid #4664F4;
+  box-shadow: inset 0 10px 0 rgba(187, 191, 216, 0.5), 0 10px 0 #2945c2;
+  left: "";
+  right: "";
+  bottom: "";
+  top: "";
+}
+.game__fight__player--scissors {
+  border: 22px solid #EB9F0E;
+  box-shadow: inset 0 10px 0 rgba(187, 191, 216, 0.5), 0 10px 0 #C76C1B;
+  left: "";
+  right: "";
+  bottom: "";
+  top: "";
+}
+.game__fight__player--rock {
+  border: 22px solid #DB2E4D;
+  box-shadow: inset 0 10px 0 rgba(187, 191, 216, 0.5), 0 10px 0 #9D1634;
+  left: "";
+  right: "";
+  bottom: "";
+  top: "";
+}
+.game__fight__player img, .game__fight__bot img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.game__fight__bot {
+  transform: scale(0);
+  animation: displayResultBot 4s ease-in 4s forwards;
+}
+.game__fight__bot::before {
+  content: "THE HOUSE PICKED";
+  left: 0;
+}
+.game__fight__bot--paper {
+  border: 22px solid #4664F4;
+  box-shadow: inset 0 10px 0 rgba(187, 191, 216, 0.5), 0 10px 0 #2945c2;
+  left: "";
+  right: -15%;
+  bottom: "";
+  top: "";
+}
+.game__fight__bot--scissors {
+  border: 22px solid #EB9F0E;
+  box-shadow: inset 0 10px 0 rgba(187, 191, 216, 0.5), 0 10px 0 #C76C1B;
+  left: "";
+  right: -15%;
+  bottom: "";
+  top: "";
+}
+.game__fight__bot--rock {
+  border: 22px solid #DB2E4D;
+  box-shadow: inset 0 10px 0 rgba(187, 191, 216, 0.5), 0 10px 0 #9D1634;
+  left: "";
+  right: -15%;
+  bottom: "";
+  top: "";
 }
 
 @media only screen and (max-width: 700px) {
@@ -163,6 +261,54 @@ body {
     box-shadow: inset 0 5px 0 rgba(187, 191, 216, 0.5), 0 5px 0 #9D1634;
     bottom: -40px;
     right: 27%;
+  }
+}
+@keyframes scaleGame {
+  0% {
+    transform: scale(0);
+  }
+  25% {
+    transform: scale(0.3);
+  }
+  50% {
+    transform: scale(0.5);
+  }
+  75% {
+    transform: scale(0.7);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes displayResultPlayer {
+  0% {
+    transform: scale(0.2);
+  }
+  20% {
+    transform: scale(1);
+  }
+  100% {
+    transform: translateX(-120px);
+  }
+}
+@keyframes displayResultBot {
+  0% {
+    transform: scale(0.2);
+  }
+  20% {
+    transform: scale(1);
+  }
+  75% {
+    transform: translateX(30px);
+  }
+  100% {
+    transform: translateX(150px);
+    transform: scale(1);
+  }
+}
+@keyframes displayYouPicked {
+  to {
+    transform: scale(1);
   }
 }
 
