@@ -121,18 +121,20 @@ body {
 .game__fight {
   position: absolute;
   top: 200px;
+  transform: translateX(-15%);
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  width: 400px;
+  width: 250px;
 }
 .game__fight__player, .game__fight__bot {
-  animation: displayResultPlayer 2s ease-in forwards;
   position: relative;
   background-color: #FFF;
   height: 144px;
   width: 152px;
   border-radius: 50%;
   padding: 60px;
+  animation: displayResultPlayer 5.9s ease-out forwards;
 }
 .game__fight__player::before, .game__fight__bot::before {
   content: "YOU PICKED";
@@ -140,9 +142,10 @@ body {
   position: absolute;
   width: 130px;
   top: -60px;
-  left: 25px;
+  left: 20px;
+  color: #FFF;
   transform: scale(0);
-  animation: displayYouPicked 2s forwards;
+  animation: displayPicked 0.3s ease-out 0.5s forwards;
 }
 .game__fight__player--paper {
   border: 22px solid #4664F4;
@@ -176,11 +179,18 @@ body {
 }
 .game__fight__bot {
   transform: scale(0);
-  animation: displayResultBot 4s ease-in 4s forwards;
+  animation: displayResultBot 3s ease-out 0.9s forwards;
 }
 .game__fight__bot::before {
   content: "THE HOUSE PICKED";
-  left: 0;
+  display: block;
+  letter-spacing: 2px;
+  position: absolute;
+  width: 170px;
+  top: -60px;
+  left: -20px;
+  transform: scale(0);
+  animation: displayPicked 0.3s ease-in 1.5s forwards;
 }
 .game__fight__bot--paper {
   border: 22px solid #4664F4;
@@ -284,31 +294,51 @@ body {
   0% {
     transform: scale(0.2);
   }
-  20% {
+  10% {
     transform: scale(1);
   }
+  30% {
+    transform: translateX(0);
+  }
+  45% {
+    transform: translateX(-130px);
+  }
   100% {
-    transform: translateX(-120px);
+    transform: translateX(-130px);
   }
 }
 @keyframes displayResultBot {
   0% {
     transform: scale(0.2);
   }
-  20% {
+  10% {
     transform: scale(1);
   }
-  75% {
-    transform: translateX(30px);
+  30% {
+    transform: translateX(0);
+  }
+  55% {
+    transform: translateX(130px);
   }
   100% {
-    transform: translateX(150px);
-    transform: scale(1);
+    transform: translateX(130px);
   }
 }
-@keyframes displayYouPicked {
-  to {
-    transform: scale(1);
+@keyframes displayPicked {
+  0% {
+    transform: scaleY(0);
+  }
+  25% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(0.6);
+  }
+  75% {
+    transform: scaleY(0.8);
+  }
+  100% {
+    transform: scaleY(1);
   }
 }
 

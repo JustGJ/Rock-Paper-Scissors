@@ -10,7 +10,6 @@
   }
 
 @mixin btnGame($borderColor, $boxShadowColor, $left:"", $right: "", $bottom: "", $top:""){
-  // position: absolute;
   border: 22px solid $borderColor;
   box-shadow: inset 0 10px 0 rgb(187 191 216 / 50%), 0 10px 0 $boxShadowColor;
   left: $left;
