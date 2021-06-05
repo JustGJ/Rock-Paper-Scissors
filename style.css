@@ -74,6 +74,7 @@ body {
   padding: 55px;
   transition: 0.5s;
   border-radius: 50%;
+  background-color: #fff;
 }
 .game__content button:hover {
   transform: scale(1.05);
