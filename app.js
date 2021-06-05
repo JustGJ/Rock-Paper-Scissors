@@ -1,8 +1,8 @@
 var game = document.querySelector('.game__content');
 var gameFight = document.querySelector('.game__fight');
 var btnGame = document.querySelectorAll('.btn');
+var score = document.querySelector('#score');
 var scorePlayer = 0;
-var scoreBot = 0;
 var hands;
 (function (hands) {
     hands["paper"] = "./images/icon-paper.svg";
@@ -39,7 +39,6 @@ btnGame.forEach(function (hand) {
         // == Create fight content player
         var resultFightPlayer = document.createElement('div');
         resultFightPlayer.classList.add('game__fight__player');
-        // == Create popup win or loose
         var handPlayerSelected;
         var handPlayerClassSelected = '';
         // == Choice player (style)
@@ -50,11 +49,11 @@ btnGame.forEach(function (hand) {
                 break;
             case 'scissors':
                 handPlayerSelected = hands.scissors;
-                handPlayerClassSelected = handClassSelectedPlayer.rock;
+                handPlayerClassSelected = handClassSelectedPlayer.scissors;
                 break;
             case 'rock':
                 handPlayerSelected = hands.rock;
-                handPlayerClassSelected = handClassSelectedPlayer.scissors;
+                handPlayerClassSelected = handClassSelectedPlayer.rock;
                 break;
         }
         // == Create fight content bot
@@ -84,11 +83,84 @@ btnGame.forEach(function (hand) {
         resultFightBot.innerHTML = "<img src='" + handBotSelected + "' alt=''>";
         resultFightBot.classList.add(handBotClassSelected);
         // == Insert div into game
-        game.style.display = 'none';
+        game.classList.add('d-none');
         gameFight.appendChild(resultFightPlayer);
         gameFight.appendChild(resultFightBot);
-        // == Insert div isWin
-        var isWin = document.createElement('div');
-        gameFight.insertBefore(isWin, resultFightBot);
+        if (gameFight.classList.contains('d-none')) {
+            gameFight.classList.remove('d-none');
+            game.classList.add('d-none');
+        }
+        // WIN OR LOOSE
+        var winOrLoose = function (result) {
+            var _a;
+            // == Create popup isWin
+            var isWin = document.createElement('div');
+            isWin.classList.add('game__fight__player__result');
+            // == Create button Play Again
+            var playAgain = document.createElement('button');
+            playAgain.innerHTML = 'PLAY AGAIN';
+            playAgain.classList.add('game__fight__player__result__playAgain');
+            if (result === 'win') {
+                scorePlayer++;
+                isWin.innerHTML = '<span>YOU WIN</span>';
+                setTimeout(function () {
+                    resultFightPlayer.classList.add('animWinner');
+                }, 3000);
+                console.log(resultFightPlayer);
+            }
+            else if (result === 'loose') {
+                scorePlayer--;
+                setTimeout(function () {
+                    resultFightBot.classList.add('animWinner');
+                }, 3000);
+                isWin.innerHTML = '<span>YOU LOSE</span>';
+            }
+            else {
+                isWin.innerHTML = '<span>GAME TIE</span>';
+            }
+            isWin.appendChild(playAgain);
+            (_a = isWin.lastChild) === null || _a === void 0 ? void 0 : _a.addEventListener('click', function () {
+                if (game.classList.contains('d-none')) {
+                    game.classList.remove('d-none');
+                    gameFight.classList.add('d-none');
+                }
+                // == Delete old div
+                for (var i = 0; i < gameFight.childNodes.length; i++) {
+                    gameFight.removeChild(gameFight.childNodes[i]);
+                }
+                gameFight.removeChild(gameFight.childNodes[0]);
+            });
+            // == Insert div isWin
+            gameFight.insertBefore(isWin, resultFightBot);
+        };
+        // == Result fight between player and bot
+        if (dataHand === 'paper' && handBot === 0) {
+            winOrLoose('egal');
+        }
+        else if (dataHand === 'paper' && handBot === 1) {
+            winOrLoose('loose');
+        }
+        else if (dataHand === 'paper' && handBot === 2) {
+            winOrLoose('win');
+        }
+        else if (dataHand === 'scissors' && handBot === 0) {
+            winOrLoose('win');
+        }
+        else if (dataHand === 'scissors' && handBot === 1) {
+            winOrLoose('egal');
+        }
+        else if (dataHand === 'scissors' && handBot === 2) {
+            winOrLoose('loose');
+        }
+        else if (dataHand === 'rock' && handBot === 0) {
+            winOrLoose('loose');
+        }
+        else if (dataHand === 'rock' && handBot === 1) {
+            winOrLoose('win');
+        }
+        else if (dataHand === 'rock' && handBot === 2) {
+            winOrLoose('egal');
+        }
+        score.innerHTML = scorePlayer.toString();
     });
 });

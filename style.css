@@ -12,6 +12,7 @@ body {
 }
 
 .game {
+  height: 90vh;
   position: relative;
   display: flex;
   align-items: center;
@@ -58,7 +59,7 @@ body {
 }
 .game__content {
   position: relative;
-  margin-top: 64px;
+  margin-top: 54px;
   width: 476px;
   animation: scaleGame 0.4s ease-in-out;
 }
@@ -70,7 +71,7 @@ body {
   cursor: pointer;
   height: 144px;
   width: 152px;
-  padding: 60px;
+  padding: 55px;
   transition: 0.5s;
   border-radius: 50%;
 }
@@ -101,7 +102,7 @@ body {
   border: 22px solid #DB2E4D;
   box-shadow: inset 0 10px 0 rgba(187, 191, 216, 0.5), 0 10px 0 #9D1634;
   left: "";
-  right: 33%;
+  right: 35%;
   bottom: -20%;
   top: "";
 }
@@ -119,13 +120,11 @@ body {
   bottom: -50px;
 }
 .game__fight {
-  position: absolute;
-  top: 200px;
-  transform: translateX(-15%);
+  transform: translateY(60px);
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  width: 250px;
+  width: 700px;
 }
 .game__fight__player, .game__fight__bot {
   position: relative;
@@ -134,12 +133,43 @@ body {
   width: 152px;
   border-radius: 50%;
   padding: 60px;
-  animation: displayResultPlayer 5.9s ease-out forwards;
+}
+.game__fight__player__result {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  transform: scale(0);
+  animation: displayIsWin 0.5s ease-out 1.5s forwards;
+}
+.game__fight__player__result span {
+  display: block;
+  text-align: center;
+  font-size: 3.6rem;
+  color: white;
+}
+.game__fight__player__result__playAgain {
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 8px;
+  border: none;
+  background-color: white;
+  color: #dc2e4e;
+  font-weight: bold;
+  letter-spacing: 1px;
+  width: 100%;
+  transition: 0.8s;
+}
+.game__fight__player__result__playAgain:hover {
+  background-color: #dc2e4e;
+  color: white;
 }
 .game__fight__player::before, .game__fight__bot::before {
   content: "YOU PICKED";
   display: block;
   position: absolute;
+  letter-spacing: 2px;
   width: 130px;
   top: -60px;
   left: 20px;
@@ -179,7 +209,6 @@ body {
 }
 .game__fight__bot {
   transform: scale(0);
-  animation: displayResultBot 3s ease-out 0.9s forwards;
 }
 .game__fight__bot::before {
   content: "THE HOUSE PICKED";
@@ -190,13 +219,13 @@ body {
   top: -60px;
   left: -20px;
   transform: scale(0);
-  animation: displayPicked 0.3s ease-in 1.5s forwards;
+  animation: displayPicked 0.3s ease-in 1.3s forwards;
 }
 .game__fight__bot--paper {
   border: 22px solid #4664F4;
   box-shadow: inset 0 10px 0 rgba(187, 191, 216, 0.5), 0 10px 0 #2945c2;
   left: "";
-  right: -15%;
+  right: "";
   bottom: "";
   top: "";
 }
@@ -204,7 +233,7 @@ body {
   border: 22px solid #EB9F0E;
   box-shadow: inset 0 10px 0 rgba(187, 191, 216, 0.5), 0 10px 0 #C76C1B;
   left: "";
-  right: -15%;
+  right: "";
   bottom: "";
   top: "";
 }
@@ -212,14 +241,25 @@ body {
   border: 22px solid #DB2E4D;
   box-shadow: inset 0 10px 0 rgba(187, 191, 216, 0.5), 0 10px 0 #9D1634;
   left: "";
-  right: -15%;
+  right: "";
   bottom: "";
   top: "";
+}
+.game__rules {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.game__rules button:hover {
+  background-color: white;
+  color: #000;
+  transition: 0.3s;
 }
 
 @media only screen and (max-width: 700px) {
   .game {
     margin-top: 48px;
+    position: relative;
   }
   .game__header {
     width: 311px;
@@ -244,35 +284,90 @@ body {
     font-size: 3.2rem;
   }
   .game__content {
-    margin-top: 105px !important;
+    margin-top: 99px;
     width: 312px;
     height: 282px;
   }
-  .game__content img {
-    transform: translate(0, 50px);
-  }
   .game__content button {
-    height: 95px;
-    width: 100px;
-    padding: 55px;
+    height: 50px;
+    width: 50px;
+    padding: 40px;
+  }
+  .game__content button img {
+    width: 35px;
+  }
+  .game__content__triangle {
+    width: 215px;
+    height: 200px;
+    transform: translate(50px, 50px) !important;
   }
   .game__content__paper {
     border: 20px solid #4664F4;
     box-shadow: inset 0 5px 0 rgba(187, 191, 216, 0.5), 0 5px 0 #2945c2;
-    left: -25px;
+    left: 0px;
   }
   .game__content__scissors {
     border: 20px solid #EB9F0E;
     box-shadow: inset 0 5px 0 rgba(187, 191, 216, 0.5), 0 5px 0 #C76C1B;
-    right: -25px;
+    right: 0px;
   }
   .game__content__rock {
     border: 20px solid #DB2E4D;
     box-shadow: inset 0 5px 0 rgba(187, 191, 216, 0.5), 0 5px 0 #9D1634;
-    bottom: -40px;
-    right: 27%;
+    bottom: 20px;
+    right: 95px;
+  }
+  .game__fight {
+    width: 312px;
+    justify-content: space-between;
+  }
+  .game__fight__player, .game__fight__bot {
+    transform: scale(0);
+    animation: scale 1s ease-out forwards;
+    height: 50px;
+    width: 50px;
+    padding: 45px;
+  }
+  .game__fight__player::before, .game__fight__bot::before {
+    top: 140px;
+    left: -5px;
+  }
+  .game__fight__player__result {
+    position: absolute;
+    bottom: 0;
+    right: 30px;
+    transform: scale(0);
+    animation: displayIsWinMobile 0.8s ease-out 2.8s forwards;
+  }
+  .game__fight__player::before, .game__fight__bot::before {
+    bottom: 0 !important;
+  }
+  .game__fight__bot {
+    animation: scale 1s ease-out 1.5s forwards !important;
+  }
+  .game__fight__bot::before {
+    top: 140px;
+    left: -30px;
+    animation: displayPicked 0.3s ease-in 2.2s forwards !important;
   }
 }
+@media only screen and (min-width: 700px) {
+  .game__fight__player, .game__fight__bot {
+    animation: displayResultPlayer 5.9s ease-out forwards;
+  }
+
+  .game__fight__bot {
+    animation: displayResultBot 3s ease-out 0.9s forwards;
+  }
+}
+.d-none {
+  display: none;
+}
+
+.animWinner {
+  animation: winAnimation 0.5s infinite 2s alternate;
+}
+
 @keyframes scaleGame {
   0% {
     transform: scale(0);
@@ -301,10 +396,10 @@ body {
     transform: translateX(0);
   }
   45% {
-    transform: translateX(-130px);
+    transform: translateX(-80px);
   }
   100% {
-    transform: translateX(-130px);
+    transform: translateX(-80px);
   }
 }
 @keyframes displayResultBot {
@@ -318,10 +413,10 @@ body {
     transform: translateX(0);
   }
   55% {
-    transform: translateX(130px);
+    transform: translateX(80px);
   }
   100% {
-    transform: translateX(130px);
+    transform: translateX(80px);
   }
 }
 @keyframes displayPicked {
@@ -339,6 +434,32 @@ body {
   }
   100% {
     transform: scaleY(1);
+  }
+}
+@keyframes scale {
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes displayIsWin {
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes displayIsWinMobile {
+  0% {
+    transform: scale(0.8) translateY(300px);
+  }
+  100% {
+    transform: scale(1) translateY(300px);
+  }
+}
+@keyframes winAnimation {
+  0% {
+    box-shadow: inset 0 10px 0 rgba(187, 191, 216, 0.5), 0 0 0 60px rgba(255, 255, 255, 0.06), 0 0 0 125px rgba(255, 255, 255, 0.04), 0 0 0 200px rgba(255, 255, 255, 0.02);
+  }
+  100% {
+    box-shadow: inset 0 10px 0 rgba(187, 191, 216, 0.5), 0 0 0 70px rgba(255, 255, 255, 0.08), 0 0 0 135px rgba(255, 255, 255, 0.06), 0 0 0 210px rgba(255, 255, 255, 0.04);
   }
 }
 
