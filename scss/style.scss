@@ -253,7 +253,7 @@
             }
         }
         &__content {
-            margin-top: 50px;
+            margin-top: 15px;
             width: 312px;
             height: 282px;
     
@@ -291,6 +291,7 @@
         &__fight {
             width: 312px;
             justify-content: space-between; 
+            transform: translateY(30px);
 
             &__player{
                 transform: scale(0);
@@ -305,7 +306,7 @@
                 }
                 &__result {
                     position: absolute;
-                    bottom: 100px;
+                    bottom: 120px;
                     right: 30px;
                     transform:  scale(0);
                     animation: displayIsWinMobile .8s ease-out 2.8s forwards;
