@@ -3,7 +3,10 @@
 @import './responsive';
 
 .game {
-    height: 90vh;
+    margin: 0 auto;
+    // overflow-y: hidden;
+    height: 80vh;
+    max-width: 700px;
     position: relative;
     @include display-align(flex, center);
     flex-direction: column;
@@ -63,7 +66,7 @@
             padding: 55px;
             transition: .5s;
             border-radius: 50%;
-            background-color: #fff;
+            background-color: #FFF;
 
             &:hover {
                 transform: scale(1.05);
@@ -114,9 +117,6 @@
             width: 152px;
             border-radius: 50%;
             padding: 60px;
-            // animation: displayResultPlayer 5.9s ease-out forwards ;
-
-            
 
             &__result {
                 display: flex;
@@ -184,7 +184,6 @@
         }
         &__bot  {
             transform: scale(0);
-            // animation: displayResultBot 3s ease-out .9s forwards;
             @extend .game__fight__player;
         
 
@@ -228,8 +227,6 @@
     .game {
         margin-top: 48px;
         position: relative;
-        height: 100vh;
-
         &__header {
             width: 311px;
             height: 96px;
@@ -256,7 +253,7 @@
             }
         }
         &__content {
-            margin-top: 99px;
+            margin-top: 50px;
             width: 312px;
             height: 282px;
     
@@ -308,7 +305,7 @@
                 }
                 &__result {
                     position: absolute;
-                    bottom: 0;
+                    bottom: 100px;
                     right: 30px;
                     transform:  scale(0);
                     animation: displayIsWinMobile .8s ease-out 2.8s forwards;
@@ -332,11 +329,32 @@
 
 @media #{$medium-up} {
     .game__fight__player {
-        animation: displayResultPlayer 5.9s ease-out forwards ;
+  
+        // animation: displayResultPlayer 5.9s ease-out forwards ;
+        animation: displayResultPlayer 4.9s ease-out forwards ;
     }
     .game__fight__bot {
-        animation: displayResultBot 3s ease-out .9s forwards;
+
+        // animation: displayResultBot 3s ease-out .9s forwards;
+        animation: displayResultBot 2s ease-out .9s forwards;
     }
+}
+
+
+.test{
+    transform: scale(1) translateX(-80px);
+    @media (max-width : 700px){
+        transform: scale(1) translateX(0);
+    }
+}
+
+.test2{
+    transform: scale(1) translateX(80px);
+    @media (max-width : 700px){
+        transform: scale(1) translateX(0);
+    }
+    // transition: 0.5;
+
 }
 
 .d-none {
@@ -344,7 +362,7 @@
 }
 
 .animWinner {
-    animation: winAnimation 0.5s infinite 2s alternate;
+    animation: winAnimation 0.5s infinite .5s alternate !important;
 }
 
 // ANIMATION 

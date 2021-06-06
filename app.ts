@@ -22,7 +22,7 @@ enum handClassSelectedBot {
 }
 
 // Current main
-let handPlayer: number = 0;
+let handPlayer: string = '';
 let handBot: number = 0;
 
 let random = (): number => {
@@ -31,15 +31,13 @@ let random = (): number => {
 
 btnGame.forEach(hand => {
 	hand.addEventListener('click', e => {
-		// == Attribute value : rock, paper or scissors
-		handPlayer = random();
-		handBot = random();
-
 		// == Pick e.target button click
 		const element = e.target as HTMLElement;
-		// == Pick data-hand button
-		const dataHand = element.dataset.hand;
 
+		// == Pick data-hand button
+		handPlayer = element.dataset.hand!;
+		// == Attribute value : rock, paper or scissors
+		handBot = random();
 		// == Create fight content player
 		let resultFightPlayer = document.createElement('div');
 		resultFightPlayer.classList.add('game__fight__player');
@@ -48,7 +46,7 @@ btnGame.forEach(hand => {
 		let handPlayerClassSelected: string = '';
 
 		// == Choice player (style)
-		switch (dataHand) {
+		switch (handPlayer) {
 			case 'paper':
 				handPlayerSelected = hands.paper;
 				handPlayerClassSelected = handClassSelectedPlayer.paper;
@@ -99,6 +97,9 @@ btnGame.forEach(hand => {
 		gameFight.appendChild(resultFightPlayer);
 		gameFight.appendChild(resultFightBot);
 
+		// resultFightPlayer.classList.add('test');
+		// resultFightBot.classList.add('test2');
+
 		if (gameFight.classList.contains('d-none')) {
 			gameFight.classList.remove('d-none');
 			game.classList.add('d-none');
@@ -116,21 +117,27 @@ btnGame.forEach(hand => {
 			playAgain.classList.add('game__fight__player__result__playAgain');
 
 			if (result === 'win') {
-				scorePlayer++;
 				isWin.innerHTML = '<span>YOU WIN</span>';
+				scorePlayer++;
 				setTimeout(() => {
+					resultFightPlayer.classList.add('test');
 					resultFightPlayer.classList.add('animWinner');
-				}, 3000);
-				console.log(resultFightPlayer);
+				}, 2400);
 			} else if (result === 'loose') {
 				scorePlayer--;
 				setTimeout(() => {
+					resultFightBot.classList.add('test2');
 					resultFightBot.classList.add('animWinner');
-				}, 3000);
+				}, 2400);
 				isWin.innerHTML = '<span>YOU LOSE</span>';
 			} else {
 				isWin.innerHTML = '<span>GAME TIE</span>';
 			}
+
+			// == Increment score
+			setTimeout(() => {
+				score.innerHTML = scorePlayer.toString();
+			}, 3000);
 
 			isWin.appendChild(playAgain);
 
@@ -151,28 +158,24 @@ btnGame.forEach(hand => {
 		};
 
 		// == Result fight between player and bot
-		if (dataHand === 'paper' && handBot === 0) {
+		if (handPlayer === 'paper' && handBot === 0) {
 			winOrLoose('egal');
-		} else if (dataHand === 'paper' && handBot === 1) {
+		} else if (handPlayer === 'paper' && handBot === 1) {
 			winOrLoose('loose');
-		} else if (dataHand === 'paper' && handBot === 2) {
+		} else if (handPlayer === 'paper' && handBot === 2) {
 			winOrLoose('win');
-		} else if (dataHand === 'scissors' && handBot === 0) {
+		} else if (handPlayer === 'scissors' && handBot === 0) {
 			winOrLoose('win');
-		} else if (dataHand === 'scissors' && handBot === 1) {
+		} else if (handPlayer === 'scissors' && handBot === 1) {
 			winOrLoose('egal');
-		} else if (dataHand === 'scissors' && handBot === 2) {
+		} else if (handPlayer === 'scissors' && handBot === 2) {
 			winOrLoose('loose');
-		} else if (dataHand === 'rock' && handBot === 0) {
+		} else if (handPlayer === 'rock' && handBot === 0) {
 			winOrLoose('loose');
-		} else if (dataHand === 'rock' && handBot === 1) {
+		} else if (handPlayer === 'rock' && handBot === 1) {
 			winOrLoose('win');
-		} else if (dataHand === 'rock' && handBot === 2) {
+		} else if (handPlayer === 'rock' && handBot === 2) {
 			winOrLoose('egal');
 		}
-
-		score.innerHTML = scorePlayer.toString();
 	});
 });
-
-

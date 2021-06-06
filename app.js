@@ -22,27 +22,26 @@ var handClassSelectedBot;
     handClassSelectedBot["rock"] = "game__fight__bot--rock";
 })(handClassSelectedBot || (handClassSelectedBot = {}));
 // Current main
-var handPlayer = 0;
+var handPlayer = '';
 var handBot = 0;
 var random = function () {
     return Math.floor(Math.random() * 3);
 };
 btnGame.forEach(function (hand) {
     hand.addEventListener('click', function (e) {
-        // == Attribute value : rock, paper or scissors
-        handPlayer = random();
-        handBot = random();
         // == Pick e.target button click
         var element = e.target;
         // == Pick data-hand button
-        var dataHand = element.dataset.hand;
+        handPlayer = element.dataset.hand;
+        // == Attribute value : rock, paper or scissors
+        handBot = random();
         // == Create fight content player
         var resultFightPlayer = document.createElement('div');
         resultFightPlayer.classList.add('game__fight__player');
         var handPlayerSelected;
         var handPlayerClassSelected = '';
         // == Choice player (style)
-        switch (dataHand) {
+        switch (handPlayer) {
             case 'paper':
                 handPlayerSelected = hands.paper;
                 handPlayerClassSelected = handClassSelectedPlayer.paper;
@@ -86,6 +85,8 @@ btnGame.forEach(function (hand) {
         game.classList.add('d-none');
         gameFight.appendChild(resultFightPlayer);
         gameFight.appendChild(resultFightBot);
+        // resultFightPlayer.classList.add('test');
+        // resultFightBot.classList.add('test2');
         if (gameFight.classList.contains('d-none')) {
             gameFight.classList.remove('d-none');
             game.classList.add('d-none');
@@ -101,23 +102,28 @@ btnGame.forEach(function (hand) {
             playAgain.innerHTML = 'PLAY AGAIN';
             playAgain.classList.add('game__fight__player__result__playAgain');
             if (result === 'win') {
-                scorePlayer++;
                 isWin.innerHTML = '<span>YOU WIN</span>';
+                scorePlayer++;
                 setTimeout(function () {
+                    resultFightPlayer.classList.add('test');
                     resultFightPlayer.classList.add('animWinner');
-                }, 3000);
-                console.log(resultFightPlayer);
+                }, 2400);
             }
             else if (result === 'loose') {
                 scorePlayer--;
                 setTimeout(function () {
+                    resultFightBot.classList.add('test2');
                     resultFightBot.classList.add('animWinner');
-                }, 3000);
+                }, 2400);
                 isWin.innerHTML = '<span>YOU LOSE</span>';
             }
             else {
                 isWin.innerHTML = '<span>GAME TIE</span>';
             }
+            // == Increment score
+            setTimeout(function () {
+                score.innerHTML = scorePlayer.toString();
+            }, 3000);
             isWin.appendChild(playAgain);
             (_a = isWin.lastChild) === null || _a === void 0 ? void 0 : _a.addEventListener('click', function () {
                 if (game.classList.contains('d-none')) {
@@ -134,33 +140,32 @@ btnGame.forEach(function (hand) {
             gameFight.insertBefore(isWin, resultFightBot);
         };
         // == Result fight between player and bot
-        if (dataHand === 'paper' && handBot === 0) {
+        if (handPlayer === 'paper' && handBot === 0) {
             winOrLoose('egal');
         }
-        else if (dataHand === 'paper' && handBot === 1) {
+        else if (handPlayer === 'paper' && handBot === 1) {
             winOrLoose('loose');
         }
-        else if (dataHand === 'paper' && handBot === 2) {
+        else if (handPlayer === 'paper' && handBot === 2) {
             winOrLoose('win');
         }
-        else if (dataHand === 'scissors' && handBot === 0) {
+        else if (handPlayer === 'scissors' && handBot === 0) {
             winOrLoose('win');
         }
-        else if (dataHand === 'scissors' && handBot === 1) {
+        else if (handPlayer === 'scissors' && handBot === 1) {
             winOrLoose('egal');
         }
-        else if (dataHand === 'scissors' && handBot === 2) {
+        else if (handPlayer === 'scissors' && handBot === 2) {
             winOrLoose('loose');
         }
-        else if (dataHand === 'rock' && handBot === 0) {
+        else if (handPlayer === 'rock' && handBot === 0) {
             winOrLoose('loose');
         }
-        else if (dataHand === 'rock' && handBot === 1) {
+        else if (handPlayer === 'rock' && handBot === 1) {
             winOrLoose('win');
         }
-        else if (dataHand === 'rock' && handBot === 2) {
+        else if (handPlayer === 'rock' && handBot === 2) {
             winOrLoose('egal');
         }
-        score.innerHTML = scorePlayer.toString();
     });
 });

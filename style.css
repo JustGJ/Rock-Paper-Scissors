@@ -12,7 +12,9 @@ body {
 }
 
 .game {
-  height: 90vh;
+  margin: 0 auto;
+  height: 80vh;
+  max-width: 700px;
   position: relative;
   display: flex;
   align-items: center;
@@ -74,7 +76,7 @@ body {
   padding: 55px;
   transition: 0.5s;
   border-radius: 50%;
-  background-color: #fff;
+  background-color: #FFF;
 }
 .game__content button:hover {
   transform: scale(1.05);
@@ -261,7 +263,6 @@ body {
   .game {
     margin-top: 48px;
     position: relative;
-    height: 100vh;
   }
   .game__header {
     width: 311px;
@@ -286,7 +287,7 @@ body {
     font-size: 3.2rem;
   }
   .game__content {
-    margin-top: 99px;
+    margin-top: 50px;
     width: 312px;
     height: 282px;
   }
@@ -336,7 +337,7 @@ body {
   }
   .game__fight__player__result {
     position: absolute;
-    bottom: 0;
+    bottom: 100px;
     right: 30px;
     transform: scale(0);
     animation: displayIsWinMobile 0.8s ease-out 2.8s forwards;
@@ -355,19 +356,37 @@ body {
 }
 @media only screen and (min-width: 700px) {
   .game__fight__player, .game__fight__bot {
-    animation: displayResultPlayer 5.9s ease-out forwards;
+    animation: displayResultPlayer 4.9s ease-out forwards;
   }
 
   .game__fight__bot {
-    animation: displayResultBot 3s ease-out 0.9s forwards;
+    animation: displayResultBot 2s ease-out 0.9s forwards;
   }
 }
+.test {
+  transform: scale(1) translateX(-80px);
+}
+@media (max-width: 700px) {
+  .test {
+    transform: scale(1) translateX(0);
+  }
+}
+
+.test2 {
+  transform: scale(1) translateX(80px);
+}
+@media (max-width: 700px) {
+  .test2 {
+    transform: scale(1) translateX(0);
+  }
+}
+
 .d-none {
   display: none;
 }
 
 .animWinner {
-  animation: winAnimation 0.5s infinite 2s alternate;
+  animation: winAnimation 0.5s infinite 0.5s alternate !important;
 }
 
 @keyframes scaleGame {
